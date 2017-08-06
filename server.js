@@ -2,10 +2,10 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 
-var app = express();
-app.use(morgan('combined'));
+var app = express(); //create web server
+app.use(morgan('combined'));//output logs
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res) {  //handles specific urls
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
