@@ -1,20 +1,11 @@
-console.log('Loaded!');
+// Counter code
+var button = document.getElementById('counter');
+var counter = 0;
 
-// Change the text of the main-text divider
-
-var element = document.getElementById('main-text');
-
-element.innerHTML = 'New Value';
-
-//Move the image
-var img = document.getElementById('madi');
-var marginLeft = 0;
-function moveRight ()
+button.onclick = function()
 {
-    marginLeft = marginLeft +5;
-    img.style.marginLeft = marginLeft + 'px';
-}
-img.onclick = function() 
-{
-   var interval = setInterval(moveRight,50);
+    
+    counter=counter+1;
+    var span = document.getElementById('count');
+    span.innerHTML = counter.toString();
 };
