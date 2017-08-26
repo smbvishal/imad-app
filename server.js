@@ -75,6 +75,12 @@ app.get('/', function (req, res) {  //handles specific urls
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+var counter=0;
+app.get('/counter', function (req, res) {  //handles specific urls
+  counter=counter+1;
+  res.send(counter.toString());
+});
+
 app.get('/:articleName', function (req, res) {  //handles specific urls
     var articleName=req.params.articleName; 
    res.send(createTemplate(articles[articleName]));
