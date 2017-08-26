@@ -5,9 +5,7 @@ var path = require('path');
 var app = express(); //create web server
 app.use(morgan('combined'));//output logs
 
-app.get('/', function (req, res) {  //handles specific urls
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
-});
+
 
 var articles = {
     'article-one' :{
@@ -72,7 +70,9 @@ function createTemplate(data)
     `;
     return htmlTemplate;
 }
-
+app.get('/', function (req, res) {  //handles specific urls
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
 
 app.get('/:articleName', function (req, res) {  //handles specific urls
     var articleName=req.getparams.articleName; 
