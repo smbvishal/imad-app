@@ -8,8 +8,56 @@ app.use(morgan('combined'));//output logs
 app.get('/', function (req, res) {  //handles specific urls
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
+
+var articleOne ={
+    title: 'Article One | Vishal S M B',
+    heading: 'Article One',
+    date: 'Aug 25,2017',
+    content: `<p> A think of beauty is a joy forever</p>
+        <p> Art is long and life is short</p>
+`
+    };
+function createTemplate(data)
+{
+    var title = data.title;
+    var date = data.date;
+    var heading = data.heading;
+    var content = data.content;
+    
+    var htmlTemplate = `
+    <html>
+    
+    <head>
+        <title>${title}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/ui/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <a href="/">Home</a>
+            </div>
+            <hr/>
+            <h3>
+                ${heading}
+            </h3>
+            <div>
+                ${date}
+            </div>
+            <div>
+            ${content}
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+    return htmlTemplate;
+}
+
+
 app.get('/article-one', function (req, res) {  //handles specific urls
-   res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+   res.send(createTemplate(articleOne));
 });
 app.get('/article-two', function (req, res) {  //handles specific urls
  res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
