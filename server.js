@@ -75,7 +75,7 @@ app.get('/', function (req, res) {  //handles specific urls
 });
 
 app.get('/:articleName', function (req, res) {  //handles specific urls
-    var articleName=req.getparams.articleName; 
+    var articleName=req.params.articleName; 
    res.send(createTemplate(articles[articleName]));
 });
 app.get('/:articleName', function (req, res) {  //handles specific urls
