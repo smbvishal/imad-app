@@ -9,14 +9,32 @@ app.get('/', function (req, res) {  //handles specific urls
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-var articleOne ={
+var articles = {
+    'article-one' :{
     title: 'Article One | Vishal S M B',
     heading: 'Article One',
     date: 'Aug 25,2017',
     content: `<p> A think of beauty is a joy forever</p>
         <p> Art is long and life is short</p>
 `
-    };
+    },
+    'article-two':{
+         title: 'Article Two | Vishal S M B',
+    heading: 'Article Two',
+    date: 'Aug 28,2017',
+    content: `<p> A think of beauty is a joy forever</p>
+        <p> Art is long and life is short</p>
+`
+    },
+    'article-three':{
+         title: 'Article Three | Vishal S M B',
+    heading: 'Article Three',
+    date: 'Aug 30,2017',
+    content: `<p> A think of beauty is a joy forever</p>
+        <p> Art is long and life is short</p>
+`
+    },
+};
 function createTemplate(data)
 {
     var title = data.title;
@@ -56,13 +74,14 @@ function createTemplate(data)
 }
 
 
-app.get('/article-one', function (req, res) {  //handles specific urls
-   res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req, res) {  //handles specific urls
+    var articleName=req.getparams.articleName; 
+   res.send(createTemplate(articles[articleName]));
 });
-app.get('/article-two', function (req, res) {  //handles specific urls
+app.get('/:articleName', function (req, res) {  //handles specific urls
  res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
 });
-app.get('/article-three', function (req, res) {  //handles specific urls
+app.get('/:articleName', function (req, res) {  //handles specific urls
  res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
 });
 app.get('/ui/style.css', function (req, res) {
