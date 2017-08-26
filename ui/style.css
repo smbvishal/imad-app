@@ -20,3 +20,11 @@ body {
     height: 200px;
 }
 
+ .container
+        {
+            max-width: 800px;
+            margin: 0 auto;
+            color: brown;
+            font-family: "Times New Roman";
+            padding: 60px 20px 0px 20px;
+        }
