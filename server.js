@@ -104,7 +104,7 @@ app.get('/articles/:articleName', function(req,res)
     {
         if(err)
         {
-            res.status(500).send(srr.toString());
+            res.status(500).send(err.toString());
         }else {
             if(result.rows.length === 0 )
             {
