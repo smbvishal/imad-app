@@ -13,35 +13,6 @@ var config = {
 var app = express(); //create web server
 app.use(morgan('combined'));//output logs
 
-
-
-var articles = {
-    'article-one' :{
-    title: 'Article One | Vishal S M B',
-    heading: 'Article One',
-    date: 'Aug 25,2017',
-    content: `<p> A think of beauty is a joy forever</p>
-        <p> Art is long and life is short</p>
-`
-    },
-    'article-two':{
-         title: 'Article Two | Vishal S M B',
-    heading: 'Article Two',
-    date: 'Aug 28,2017',
-    content: `<p> A think of beauty is a joy forever</p>
-        <p> Art is long and life is short</p>
-`
-    },
-    'article-three':{
-         title: 'Article Three | Vishal S M B',
-    heading: 'Article Three',
-    date: 'Aug 30,2017',
-    content: `<p> A think of beauty is a joy forever</p>
-        <p> Art is long and life is short</p>
-`
-    },
-};
-
 var pool = new Pool(config);
 function createTemplate(data){
     var title = data.title;
@@ -84,41 +55,6 @@ app.get('/', function (req, res) {  //handles specific urls
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/test-db',function(req,res)
-{
-    pool.query('SELECT * FROM user',function(err, result)
-    {
-        if(err)
-        {
-            res.status(500).send(err.toString());
-        }else
-        {
-            res.send(JSON.stringify(result.rows));
-        }
-    });
-});
-
-app.get('/articles/:articleName', function(req,res)
-{
-    pool.query("SELECT * FROM myarticle WHERE title = '" +req.params.articleName +"'", function (err, result)
-    {
-        if(err)
-        {
-            res.status(500).send(err.toString());
-        }else {
-            if(result.rows.length === 0 )
-            {
-                res.status(404).send('Article not found');
-            }else
-            {
-                var articleData = result.rows[0];
-                res.send(createTemplate(articleData));
-            }
-        }
-    });
-});
-
-
 app.get('/article/:articleName', function(req,res)
 {
     pool.query("SELECT * FROM myarticle WHERE title = $1" ,[req.params.articleName], function (err, result)
@@ -145,10 +81,7 @@ app.get('/counter', function (req, res) {  //handles specific urls
 });
 
 
-app.get('/:articleName', function (req, res) {  //handles specific urls
-    var articleName=req.params.articleName; 
-   res.send(createTemplate(articles[articleName]));
-});
+
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
