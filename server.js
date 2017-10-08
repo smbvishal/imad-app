@@ -8,7 +8,7 @@ var config = {
     database: 'myarticle',
     host : 'db.imad.hasura-app.io',
     port: '5432',
-    password:'db-smbvishal1-19577'
+    password:process.env.DB_PASSWORD
 }
 var app = express(); //create web server
 app.use(morgan('combined'));//output logs
