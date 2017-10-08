@@ -42,6 +42,7 @@ var articles = {
     },
 };
 
+var pool = new Pool(config);
 function createTemplate(data){
     var title = data.title;
     var date = data.date;
@@ -83,11 +84,27 @@ app.get('/', function (req, res) {  //handles specific urls
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+app.get('/test-db',function(req,res)
+{
+    pool.query('SEELCT * FROM myarticle',function(err, result)
+    {
+        if(err)
+        {
+            res.status(500).send(err.toString());
+        }else
+        {
+            res.send(JSON.stringify(result));
+        }
+    });
+});
+
+
 var counter=0;
 app.get('/counter', function (req, res) {  //handles specific urls
   counter=counter+1;
   res.send(counter.toString());
 });
+
 
 app.get('/:articleName', function (req, res) {  //handles specific urls
     var articleName=req.params.articleName; 
@@ -104,6 +121,7 @@ app.get('/ui/madi.png', function (req, res) {
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
+
 
 
 // Do not change port, otherwise your app won't run on IMAD servers
