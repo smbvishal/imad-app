@@ -86,7 +86,7 @@ app.get('/', function (req, res) {  //handles specific urls
 
 app.get('/test-db',function(req,res)
 {
-    pool.query('SELCT * FROM user',function(err, result)
+    pool.query('SELECT * FROM user',function(err, result)
     {
         if(err)
         {
